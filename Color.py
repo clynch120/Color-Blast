@@ -10,6 +10,7 @@ class Color:
 
     def random_pattern(self):
         rand = ra.randint(4)
+        time.sleep(1)
         return rand
 
     def user_input(self):
@@ -18,3 +19,14 @@ class Color:
             point += 1
             return point
 
+r_list = []
+user_list = []
+j = 0
+
+while user_list == r_list:
+    user_list = []
+    r_list.append(ra.randint(1, 4))
+    print(r_list[j])
+    user = input("Your turn : ")
+    user_list = [int(x) for x in user.split()]
+    j += 1

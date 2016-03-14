@@ -1,8 +1,8 @@
 from tkinter import *
-from GUI.Color import Color
+#from GUI.Color import Color
 
 
-class Gui(Frame, Color):
+class Gui(Frame):
     # calls all the methods when the program starts
     def __init__(self):
         Frame.__init__(self, bg="#303030")  # set window background color
