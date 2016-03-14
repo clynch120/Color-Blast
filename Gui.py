@@ -78,13 +78,14 @@ class Gui(Frame):
 
     def computer_list(self):
         while self.user_input == self.com_list:
+
             com = self.com_list.append(ra.randint(1, 4))
             time.sleep(1)
             return com
 
     def show_com_list(self):
-        
+        print("hello")
+
 root = Tk()
 app = Gui()
 app.mainloop()
-
