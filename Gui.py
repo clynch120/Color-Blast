@@ -80,6 +80,7 @@ class Gui(Frame):
     def show_com_list(self):
         while self.user_input == self.com_list:
             com = self.com_list.append(ra.randint(1, 4))
+            red_btn.invoke(com_list)
             time.sleep(1)
             return com
         print(com_list)
