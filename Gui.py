@@ -8,7 +8,7 @@ class Gui(Frame):
     def __init__(self):
         Frame.__init__(self, bg="#303030")  # set window background color
         self.window()
-        self.level()
+        #self.level()
         self.red_btn()
         self.green_btn()
         self.blue_btn()
@@ -17,6 +17,7 @@ class Gui(Frame):
         self.count = 0
         self.user_input = []
         self.com_list = []
+        self.show_com_list
 
     def level(self):    # creates pop up window
         top = Toplevel()
@@ -45,13 +46,13 @@ class Gui(Frame):
         blue = Button(self, bg="blue", command=self.count_blue)
         blue.config(width=50, height=20)
         blue["text"] = "Blue"
-        blue.grid(row=2, column=0)
+        blue.grid(row=0, column=2)
 
     def green_btn(self):    # creates the green button
         green = Button(self, bg="green", command=self.count_green)
         green.config(width=50, height=20)
         green["text"] = "Green"
-        green.grid(row=0, column=2)
+        green.grid(row=2, column=0)
 
     def yellow_btn(self):    # creates the yellow button
         yellow = Button(self, bg="yellow", command=self.count_yellow)
@@ -76,15 +77,12 @@ class Gui(Frame):
         print(self.user_input)
         return y
 
-    def computer_list(self):
+    def show_com_list(self):
         while self.user_input == self.com_list:
-
             com = self.com_list.append(ra.randint(1, 4))
             time.sleep(1)
             return com
-
-    def show_com_list(self):
-        print("hello")
+        print(com_list)
 
 root = Tk()
 app = Gui()
