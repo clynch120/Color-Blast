@@ -8,28 +8,17 @@ class Gui(Frame):
     def __init__(self):
         Frame.__init__(self, bg="#303030")  # set window background color
         self.window()
-        #self.level()
+        self.chars = "r", "b", "g", "y"
+        self.user_input = []
+        self.com_list = []
+        self.count = 0
+        self.show_com_list
+        self.get_next_color()
         self.red_btn()
         self.green_btn()
         self.blue_btn()
         self.yellow_btn()
         self.grid()
-        self.count = 0
-        self.user_input = []
-        self.com_list = []
-        self.show_com_list
-
-    def level(self):    # creates pop up window
-        top = Toplevel()
-        top.attributes("-topmost", 1)
-        top.title("Difficultly level")
-        top.geometry("250x100")
-        msg = Message(top, text="Enter Difficultly : 1 - 9", width=150)
-        msg.pack()
-        e = Entry(top)
-        e.pack()
-        button = Button(top, text="Select", command=top.destroy)
-        button.pack()
 
     def window(self):    # creates the window
         root.title("Color Blast")
@@ -61,29 +50,62 @@ class Gui(Frame):
         yellow.grid(row=2, column=2)
 
     def count_red(self):
-        r = self.user_input.append(1)
+        r = self.user_input.append("r")
         return r
 
     def count_blue(self):
-        b = self.user_input.append(2)
+        b = self.user_input.append("b")
         return b
 
     def count_green(self):
-        g = self.user_input.append(3)
+        g = self.user_input.append("g")
         return g
 
     def count_yellow(self):
-        y = self.user_input.append(4)
+        y = self.user_input.append("y")
         print(self.user_input)
+        print(self.com_list)
         return y
 
+    def get_next_color(self):
+        if self.yellow_btn() == "y":
+            b = self.com_list.append(ra.choice(self.chars))
+            return b
+        elif self.green_btn() == True:
+            b = self.com_list.append(ra.choice(self.chars))
+            return b
+        elif self.blue_btn() == True:
+            b = self.com_list.append(ra.choice(self.chars))
+            return b
+        elif self.red_btn() == True:
+            b = self.com_list.append(ra.choice(self.chars))
+            return b
+
     def show_com_list(self):
-        while self.user_input == self.com_list:
-            com = self.com_list.append(ra.randint(1, 4))
-            red_btn.invoke(com_list)
-            time.sleep(1)
-            return com
-        print(com_list)
+        if self.get_next_color() == "y":
+            self.yellow_btn.config(bg="white")
+            root.update()
+            time.sleep(0.5)
+            self.yellow_btn.config(bg="yellow")
+            root.update()
+        elif self.get_next_color() == "g":
+            self.green_btn.config(bg="white")
+            root.update()
+            time.sleep(0.5)
+            self.green_btn.config(bg="green")
+            root.update()
+        elif self.get_next_color() == "b":
+            self.blue_btn.config(bg="white")
+            root.update()
+            time.sleep(.5)
+            self.blue_btn.config(bg="blue")
+            root.update()
+        elif self.get_next_color() == "r":
+            self.red_btn.config(bg="white")
+            root.update()
+            time.sleep(.5)
+            self.red_btn.config(bg="red")
+            root.update()
 
 root = Tk()
 app = Gui()
