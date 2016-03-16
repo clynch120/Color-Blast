@@ -10,102 +10,77 @@ class Gui(Frame):
         self.window()
         self.chars = "r", "b", "g", "y"
         self.user_input = []
-        self.com_list = []
-        self.count = 0
-        self.show_com_list
-        self.get_next_color()
-        self.red_btn()
-        self.green_btn()
-        self.blue_btn()
-        self.yellow_btn()
+        self.count = 1
+        self.computer_list = []
         self.grid()
+
+        # creates the red button
+        self.red = Button(self, bg="red", command=self.count_red)
+        self.red.config(width=50, height=20)
+        self.red["text"] = "Red"
+        self.red.grid(row=0, column=0, padx=70, pady=70)    # sets location and space between buttons
+
+        # creates the blue button
+        self.blue = Button(self, bg="blue", command=self.count_blue)
+        self.blue.config(width=50, height=20)
+        self.blue["text"] = "Blue"
+        self.blue.grid(row=0, column=2)
+
+        # creates the green button
+        self.green = Button(self, bg="green", command=self.count_green)
+        self.green.config(width=50, height=20)
+        self.green["text"] = "Green"
+        self.green.grid(row=2, column=0)
+
+        # creates the yellow button
+        self.yellow = Button(self, bg="yellow", command=self.count_yellow)
+        self.yellow.config(width=50, height=20)
+        self.yellow["text"] = "Yellow"
+        self.yellow.grid(row=2, column=2)
 
     def window(self):    # creates the window
         root.title("Color Blast")
         root.geometry("950x840")
         root.config(bg="#303030")
 
-    def red_btn(self):    # creates the red button
-        red = Button(self, bg="red", command=self.count_red)
-        red.config(width=50, height=20)
-        red["text"] = "Red"
-        red.grid(row=0, column=0, padx=70, pady=70)    # sets location and space between buttons
-
-    def blue_btn(self):    # creates the blue button
-        blue = Button(self, bg="blue", command=self.count_blue)
-        blue.config(width=50, height=20)
-        blue["text"] = "Blue"
-        blue.grid(row=0, column=2)
-
-    def green_btn(self):    # creates the green button
-        green = Button(self, bg="green", command=self.count_green)
-        green.config(width=50, height=20)
-        green["text"] = "Green"
-        green.grid(row=2, column=0)
-
-    def yellow_btn(self):    # creates the yellow button
-        yellow = Button(self, bg="yellow", command=self.count_yellow)
-        yellow.config(width=50, height=20)
-        yellow["text"] = "Yellow"
-        yellow.grid(row=2, column=2)
-
     def count_red(self):
         r = self.user_input.append("r")
+        self.you_win()
         return r
 
     def count_blue(self):
         b = self.user_input.append("b")
+        self.you_win()
         return b
 
     def count_green(self):
         g = self.user_input.append("g")
+        self.you_win()
         return g
 
     def count_yellow(self):
         y = self.user_input.append("y")
-        print(self.user_input)
-        print(self.com_list)
+        self.you_win()
         return y
 
-    def get_next_color(self):
-        if self.yellow_btn() == "y":
-            b = self.com_list.append(ra.choice(self.chars))
-            return b
-        elif self.green_btn() == True:
-            b = self.com_list.append(ra.choice(self.chars))
-            return b
-        elif self.blue_btn() == True:
-            b = self.com_list.append(ra.choice(self.chars))
-            return b
-        elif self.red_btn() == True:
-            b = self.com_list.append(ra.choice(self.chars))
-            return b
+    def ran_color(self):
+        for i in range(self.count):
+            self.computer_list.append(ra.choice(self.chars))
+        print(self.computer_list)
+        print(self.user_input)
+        self.count += 1
+        self.computer_list = []
 
-    def show_com_list(self):
-        if self.get_next_color() == "y":
-            self.yellow_btn.config(bg="white")
-            root.update()
-            time.sleep(0.5)
-            self.yellow_btn.config(bg="yellow")
-            root.update()
-        elif self.get_next_color() == "g":
-            self.green_btn.config(bg="white")
-            root.update()
-            time.sleep(0.5)
-            self.green_btn.config(bg="green")
-            root.update()
-        elif self.get_next_color() == "b":
-            self.blue_btn.config(bg="white")
-            root.update()
-            time.sleep(.5)
-            self.blue_btn.config(bg="blue")
-            root.update()
-        elif self.get_next_color() == "r":
-            self.red_btn.config(bg="white")
-            root.update()
-            time.sleep(.5)
-            self.red_btn.config(bg="red")
-            root.update()
+    def you_win(self):
+        if self.user_input == self.ran_color():
+            top = Toplevel()
+            msg = Message(top, text="Your Right!")
+            msg.pack()
+            btn = Button(top, text="Dismiss", command=top.destroy)
+            btn.pack()
+            self.user_input = []
+
+            self.count = 1
 
 root = Tk()
 app = Gui()
