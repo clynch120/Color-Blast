@@ -1,4 +1,5 @@
 # Color-Blast
-Not Finished
+# My first Gui python project
 Python UI game
-Simon says like game with four color tiles 
+Guess the color of a tile 
+that the computer picks
