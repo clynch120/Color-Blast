@@ -1,6 +1,5 @@
 from tkinter import *
 import random as ra
-import time
 
 
 class Gui(Frame):
@@ -10,10 +9,9 @@ class Gui(Frame):
         self.window()
         self.chars = "r", "b", "g", "y"
         self.user_input = []
-        self.count = 1
-        self.grid()
         self.com_list = []
-        
+        self.grid()
+
         # creates the red button
         self.red = Button(self, bg="red", command=self.count_red)
         self.red.config(width=50, height=20)
@@ -43,55 +41,56 @@ class Gui(Frame):
         root.geometry("950x840")
         root.config(bg="#303030")
 
-    def count_red(self):
+    def count_red(self):    # add r to user input
         r = self.user_input.append("r")
         self.you_win()
         return r
 
-    def count_blue(self):
+    def count_blue(self):    # add b to user input
         b = self.user_input.append("b")
         self.you_win()
         return b
 
-    def count_green(self):
+    def count_green(self):    # add g to user input
         g = self.user_input.append("g")
         self.you_win()
         return g
 
-    def count_yellow(self):
+    def count_yellow(self):    # add y to user input
         y = self.user_input.append("y")
         self.you_win()
         return y
 
-    def ran_color(self):
-        for i in range(self.count):
-            self.com_list.append(ra.choice(self.chars))        
-        print(self.com_list)
-        print(self.user_input)
+    def ran_color(self):    # adds random char to com_list
+        self.com_list.append(ra.choice(self.chars))
         return self.com_list
-    
-    def you_win(self):
-        computer = self.ran_color()
+
+    def you_win(self):    # gets called when you click a button
+        self.ran_color()
+        # checks if random and com number are equal lengths
         if len(self.user_input) == len(self.com_list):
-            if self.user_input == self.com_list:
+            if self.user_input == self.com_list:    # popup window if you guessed right
                 top = Toplevel()
                 top.geometry("150x75")
                 msg = Message(top, text="Your Win this round!")
                 msg.pack()
                 btn = Button(top, text="On to the next level", command=top.destroy)
                 btn.pack()
-
-        else:                     
-            top = Toplevel()
-            top.geometry("150x75")
-            msg = Message(top, text="You Lose!")
-            msg.pack()           
-            btn = Button(top, text="Dismiss", command=top.destroy)
-            btn.pack()
+                self.com_list = []
+                self.user_input = []
+            else:    # popup window if you didn't guess the right color
+                top = Toplevel()
+                top.geometry("150x75")
+                msg = Message(top, text="You Lose!")
+                msg.pack()
+                btn = Button(top, text="Retry", command=top.destroy)
+                btn.pack()
+                self.user_input = []
+                self.com_list = []
+        elif len(self.user_input) != len(self.com_list):   # resets list length just in case
             self.user_input = []
             self.com_list = []
-            self.count = 1
-            
+
 
 root = Tk()
 app = Gui()
