@@ -12,7 +12,7 @@ class Gui(Frame):
         self.user_input = []
         self.count = 1
         self.grid()
-
+        self.com_list = []
         
         # creates the red button
         self.red = Button(self, bg="red", command=self.count_red)
@@ -64,23 +64,23 @@ class Gui(Frame):
         return y
 
     def ran_color(self):
-        b = []
         for i in range(self.count):
-            b.append(ra.choice(self.chars))        
-        print(b)
+            self.com_list.append(ra.choice(self.chars))        
+        print(self.com_list)
         print(self.user_input)
-        return b
+        return self.com_list
     
     def you_win(self):
-        if self.user_input == self.ran_color():
-            top = Toplevel()
-            top.geometry("150x75")
-            msg = Message(top, text="Your Win this round!")
-            msg.pack()
-            btn = Button(top, text="Dismiss", command=top.destroy)
-            btn.pack()
-            self.user_input = []
-            self.count += 1
+        computer = self.ran_color()
+        if len(self.user_input) == len(self.com_list):
+            if self.user_input == self.com_list:
+                top = Toplevel()
+                top.geometry("150x75")
+                msg = Message(top, text="Your Win this round!")
+                msg.pack()
+                btn = Button(top, text="On to the next level", command=top.destroy)
+                btn.pack()
+
         else:                     
             top = Toplevel()
             top.geometry("150x75")
@@ -89,6 +89,7 @@ class Gui(Frame):
             btn = Button(top, text="Dismiss", command=top.destroy)
             btn.pack()
             self.user_input = []
+            self.com_list = []
             self.count = 1
             
 
